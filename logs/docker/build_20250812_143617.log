@@ -1,0 +1,64 @@
+=== 开始构建流程 2025年 08月 12日 星期二 14:36:17 CST ===
+（可选）在宿主机预下载 Go 模块以便本地开发...
+开始构建 Docker 镜像（使用 alpine 作为运行时镜像）...
+#0 building with "default" instance using docker driver
+
+#1 [internal] load build definition from dockerfile
+#1 transferring dockerfile: 993B done
+#1 DONE 0.1s
+
+#2 [internal] load metadata for docker.io/library/golang:1.22
+#2 DONE 2.0s
+
+#3 [internal] load metadata for docker.io/library/alpine:3.20
+#3 DONE 4.7s
+
+#4 [internal] load .dockerignore
+#4 transferring context: 2B done
+#4 DONE 0.1s
+
+#5 [builder 1/6] FROM docker.io/library/golang:1.22@sha256:1cf6c45ba39db9fd6db16922041d074a63c935556a05c5ccb62d181034df7f02
+#5 DONE 0.0s
+
+#6 [stage-1 1/4] FROM docker.io/library/alpine:3.20@sha256:b3119ef930faabb6b7b976780c0c7a9c1aa24d0c75e9179ac10e6bc9ac080d0d
+#6 CACHED
+
+#7 [internal] load build context
+#7 transferring context: 27.49kB 0.0s done
+#7 DONE 0.3s
+
+#8 [stage-1 2/4] RUN apk --no-cache add ca-certificates tzdata     && update-ca-certificates
+#8 ...
+
+#9 [builder 2/6] WORKDIR /app
+#9 CACHED
+
+#10 [builder 3/6] COPY go.mod go.sum ./
+#10 CACHED
+
+#11 [builder 4/6] RUN go mod download
+#11 1.585 go: go.mod requires go >= 1.24.4 (running go 1.22.12; GOTOOLCHAIN=local)
+#11 ERROR: process "/bin/sh -c go mod download" did not complete successfully: exit code: 1
+
+#8 [stage-1 2/4] RUN apk --no-cache add ca-certificates tzdata     && update-ca-certificates
+#8 1.842 fetch https://dl-cdn.alpinelinux.org/alpine/v3.20/main/x86_64/APKINDEX.tar.gz
+#8 2.479 fetch https://dl-cdn.alpinelinux.org/alpine/v3.20/community/x86_64/APKINDEX.tar.gz
+#8 2.881 (1/2) Installing ca-certificates (20250619-r0)
+#8 2.974 (2/2) Installing tzdata (2025b-r0)
+#8 3.088 Executing busybox-1.36.1-r29.trigger
+#8 3.091 Executing ca-certificates-20250619-r0.trigger
+#8 3.122 OK: 10 MiB in 16 packages
+#8 DONE 4.4s
+------
+ > [builder 4/6] RUN go mod download:
+1.585 go: go.mod requires go >= 1.24.4 (running go 1.22.12; GOTOOLCHAIN=local)
+------
+dockerfile:10
+--------------------
+   8 |     # 先拷贝 go.mod/go.sum 以便最大化利用依赖缓存
+   9 |     COPY go.mod go.sum ./
+  10 | >>> RUN go mod download
+  11 |     
+  12 |     # 再拷贝其余源码
+--------------------
+ERROR: failed to build: failed to solve: process "/bin/sh -c go mod download" did not complete successfully: exit code: 1

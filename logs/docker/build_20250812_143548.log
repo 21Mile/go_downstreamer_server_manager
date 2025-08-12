@@ -1,0 +1,80 @@
+=== 开始构建流程 2025年 08月 12日 星期二 14:35:48 CST ===
+（可选）在宿主机预下载 Go 模块以便本地开发...
+开始构建 Docker 镜像（使用 alpine 作为运行时镜像）...
+#0 building with "default" instance using docker driver
+
+#1 [internal] load build definition from dockerfile
+#1 transferring dockerfile: 1.30kB done
+#1 DONE 0.1s
+
+#2 [internal] load metadata for docker.io/library/golang:1.22
+#2 ...
+
+#3 [internal] load metadata for docker.io/library/alpine:3.20
+#3 DONE 1.4s
+
+#2 [internal] load metadata for docker.io/library/golang:1.22
+#2 DONE 1.6s
+
+#4 [internal] load .dockerignore
+#4 transferring context: 2B done
+#4 DONE 0.1s
+
+#5 [stage-1 1/5] FROM docker.io/library/alpine:3.20@sha256:b3119ef930faabb6b7b976780c0c7a9c1aa24d0c75e9179ac10e6bc9ac080d0d
+#5 DONE 0.0s
+
+#6 [builder 1/6] FROM docker.io/library/golang:1.22@sha256:1cf6c45ba39db9fd6db16922041d074a63c935556a05c5ccb62d181034df7f02
+#6 DONE 0.0s
+
+#7 [internal] load build context
+#7 ...
+
+#5 [stage-1 1/5] FROM docker.io/library/alpine:3.20@sha256:b3119ef930faabb6b7b976780c0c7a9c1aa24d0c75e9179ac10e6bc9ac080d0d
+#5 CACHED
+
+#7 [internal] load build context
+#7 transferring context: 39.35kB 0.0s done
+#7 DONE 0.6s
+
+#8 [stage-1 2/5] RUN apk --no-cache add ca-certificates tzdata     && update-ca-certificates
+#8 ...
+
+#9 [builder 5/6] COPY . .
+#9 CACHED
+
+#10 [stage-1 4/5] COPY --from=builder /app/bin/main /app/main
+#10 CACHED
+
+#11 [builder 2/6] WORKDIR /app
+#11 CACHED
+
+#12 [builder 4/6] RUN go mod download
+#12 CACHED
+
+#13 [builder 6/6] RUN CGO_ENABLED=0 GOOS=linux GOARCH=amd64     go build -ldflags="-s -w" -o /app/bin/main .
+#13 CACHED
+
+#14 [stage-1 3/5] WORKDIR /app
+#14 CACHED
+
+#15 [builder 3/6] COPY go.mod go.sum ./
+#15 CACHED
+
+#16 [stage-1 5/5] COPY ./conf/prod/ /app/conf/prod/
+#16 ERROR: failed to calculate checksum of ref 02559486-9a40-463d-a409-045148649399::kjg73515jblidl899uvz9r998: "/conf/prod": not found
+
+#8 [stage-1 2/5] RUN apk --no-cache add ca-certificates tzdata     && update-ca-certificates
+#8 1.028 fetch https://dl-cdn.alpinelinux.org/alpine/v3.20/main/x86_64/APKINDEX.tar.gz
+#8 CANCELED
+------
+ > [stage-1 5/5] COPY ./conf/prod/ /app/conf/prod/:
+------
+dockerfile:35
+--------------------
+  33 |     
+  34 |     # 按你的示例：拷贝宿主机配置（如果没有该目录请删除或改成你的实际路径）
+  35 | >>> COPY ./conf/prod/ /app/conf/prod/
+  36 |     
+  37 |     # 如二进制是静态编译，直接运行；否则需在镜像中提供对应 libc（我们已静态编译）
+--------------------
+ERROR: failed to build: failed to solve: failed to compute cache key: failed to calculate checksum of ref 02559486-9a40-463d-a409-045148649399::kjg73515jblidl899uvz9r998: "/conf/prod": not found

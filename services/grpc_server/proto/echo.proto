@@ -1,0 +1,20 @@
+// cmd :protoc -I . --go_out=plugins=grpc:proto ./echo.proto
+syntax="proto3";
+option go_package=".;proto";//go的导入设置，如何使用URL作为包名，那么中间的分隔符为';'
+message EchoRequest{
+    string message=1;
+}
+
+message EchoResponse{
+    string message=1;
+}
+
+service Echo{
+    rpc UnaryEcho(EchoRequest) returns (EchoResponse){} //普通的非流式调用，客户端和服务端共用
+    rpc ServiceStreamingEcho(EchoRequest) returns(stream EchoResponse){} //服务端的流式调用方法
+    rpc ClientStreamingEcho(stream EchoRequest) returns(EchoResponse){} //客户端的流式调用方法
+    // 流式传入request，流式返回response
+    rpc BidirectionalStreamingEcho(stream EchoRequest) returns (stream EchoResponse){} //绑定式的双向流式方法调用
+
+
+}

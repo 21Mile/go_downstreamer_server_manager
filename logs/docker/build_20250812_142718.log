@@ -1,0 +1,27 @@
+=== 开始构建流程 2025年 08月 12日 星期二 14:27:18 CST ===
+（可选）在宿主机预下载 Go 模块以便本地开发...
+开始构建 Docker 镜像...
+#0 building with "default" instance using docker driver
+
+#1 [internal] load build definition from dockerfile
+#1 transferring dockerfile:
+#1 transferring dockerfile: 852B done
+#1 DONE 0.5s
+
+#2 [internal] load metadata for docker.io/library/golang:1.22
+#2 DONE 6.0s
+
+#3 [internal] load metadata for gcr.io/distroless/static-debian12:latest
+#3 ERROR: failed to do request: Head "https://gcr.io/v2/distroless/static-debian12/manifests/latest": dial tcp 172.217.194.82:443: i/o timeout
+------
+ > [internal] load metadata for gcr.io/distroless/static-debian12:latest:
+------
+dockerfile:21
+--------------------
+  19 |     
+  20 |     # NEW: 运行时镜像（更小）
+  21 | >>> FROM gcr.io/distroless/static-debian12  
+  22 |     WORKDIR /app
+  23 |     COPY --from=builder /app/bin/main /app/main 
+--------------------
+ERROR: failed to build: failed to solve: DeadlineExceeded: gcr.io/distroless/static-debian12: failed to resolve source metadata for gcr.io/distroless/static-debian12:latest: failed to do request: Head "https://gcr.io/v2/distroless/static-debian12/manifests/latest": dial tcp 172.217.194.82:443: i/o timeout

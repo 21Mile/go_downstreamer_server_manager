@@ -1,0 +1,2 @@
+2025/08/12 13:22:24 gateway_server.go:108: 开始启动gRPC服务器，端口: 50055, 配置路径: /home/cyan/Go_Projects/downstream_server_cluster/logs, 日志路径: %!s(*string=0xc00011fe88)
+2025/08/12 13:22:24 gateway_server.go:115: grpc server listening at [::]:50055

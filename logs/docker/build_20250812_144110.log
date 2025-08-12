@@ -1,0 +1,48 @@
+=== 开始构建流程 2025年 08月 12日 星期二 14:41:10 CST ===
+（可选）宿主机预下载 Go 模块...
+Go 版本: go version go1.24.4 linux/amd64
+GOTOOLCHAIN=auto, CGO_ENABLED=0
+开始交叉编译：GOOS=linux GOARCH=amd64 -> ./bin/downstream-server-manager
+构建完成的二进制：./bin/downstream-server-manager
+./bin/downstream-server-manager: ELF 64-bit LSB executable, x86-64, version 1 (SYSV), statically linked, BuildID[sha1]=dbbf758139be67f255046b77b08d9b527db75783, stripped
+开始构建 Docker 运行时镜像（使用 alpine 作为运行时镜像）...
+#0 building with "default" instance using docker driver
+
+#1 [internal] load build definition from dockerfile
+#1 transferring dockerfile: 862B done
+#1 DONE 0.1s
+
+#2 [internal] load metadata for docker.io/library/alpine:3.20
+#2 DONE 1.9s
+
+#3 [internal] load .dockerignore
+#3 transferring context: 2B done
+#3 DONE 0.2s
+
+#4 [1/4] FROM docker.io/library/alpine:3.20@sha256:b3119ef930faabb6b7b976780c0c7a9c1aa24d0c75e9179ac10e6bc9ac080d0d
+#4 DONE 0.0s
+
+#5 [2/4] RUN apk --no-cache add ca-certificates tzdata     && update-ca-certificates
+#5 CACHED
+
+#6 [3/4] WORKDIR /app
+#6 CACHED
+
+#7 [internal] load build context
+#7 transferring context: 12.35MB 0.1s done
+#7 DONE 0.3s
+
+#8 [4/4] COPY ./bin/downstream-server-manager /app/downstream-server-manager
+#8 DONE 5.0s
+
+#9 exporting to image
+#9 exporting layers
+#9 exporting layers 1.3s done
+#9 writing image sha256:9e61333034978f4f042dee095a573bd4d0cde5ed9a4dcec91563d0bcd8444d63 0.1s done
+#9 naming to docker.io/library/downstream-server-manager:alpine 0.1s done
+#9 DONE 1.6s
+=== 构建完成 2025年 08月 12日 星期二 14:41:37 CST ===
+生成的镜像:
+REPOSITORY                  TAG                  IMAGE ID       CREATED          SIZE
+downstream-server-manager   alpine               9e6133303497   4 seconds ago    21.1MB
+提示: 可使用 'docker system prune' 清理未使用的镜像/缓存

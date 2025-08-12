@@ -1,0 +1,27 @@
+# This is base config
+
+base:
+  debug_mode: "debug" #[debug,release]
+  time_location: "Asia/Shanghai"
+
+http:
+  addrs:
+    - "127.0.0.1:2003"
+    - "127.0.0.1:2004"
+    - "127.0.0.1:2005"
+    - "127.0.0.1:2006"
+
+grpc:
+ streamingCount: 10
+ ports:
+    - 50055 #grpc监听端口
+tcp:
+ ports:
+    - 3003 #tcp监听端口
+
+log:
+  log_level: "trace" #日志打印最低级别
+  file_writer_on: false #是否将日志写入文件（压测时建议关闭）
+  log_path: "./logs/"
+  console_writer: true
+  color: false

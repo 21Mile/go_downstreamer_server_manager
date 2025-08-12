@@ -1,0 +1,4 @@
+2025/08/12 13:02:43 http_real_server_register.go:19: 开始启动http服务器，addr: 127.0.0.1:2003, 日志路径: /home/cyan/Go_Projects/downstream_server_cluster/logs
+2025/08/12 13:02:43 http_real_server_register.go:19: 开始启动http服务器，addr: 127.0.0.1:2004, 日志路径: /home/cyan/Go_Projects/downstream_server_cluster/logs
+2025/08/12 13:02:43 http_real_server_register.go:19: 开始启动http服务器，addr: 127.0.0.1:2005, 日志路径: /home/cyan/Go_Projects/downstream_server_cluster/logs
+2025/08/12 13:02:43 http_real_server_register.go:19: 开始启动http服务器，addr: 127.0.0.1:2006, 日志路径: /home/cyan/Go_Projects/downstream_server_cluster/logs
